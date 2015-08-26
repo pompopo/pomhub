@@ -3,11 +3,26 @@ var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
 
 export const AUTH_DID_SUCCEED = 'AUTH_DID_SUCCEED';
+export const FETCH_USER_SUCCEED = 'FETCH_USER_SUCCEED';
 
 function auth_did_succeed(token) {
     return {
       type: AUTH_DID_SUCCEED,
       token: token
+    }
+}
+export function fetchUser() {
+    return (dispatch, getState) => {
+      let token = getState().github.auth_token;
+      let client = github.client(token);
+      client.get('/user', {}, (err, status, body, header) => {
+        dispatch({
+          type: FETCH_USER_SUCCEED,
+          user: body
+        });
+        var util = require('util');
+        console.log('body = ' + util.inspect(body));
+      });
     }
 }
 
