@@ -3,13 +3,22 @@ import { connect } from 'react-redux'
 import { fetchUser } from '../actions/github'
 
 export default class Top extends React.Component {
+  componentDidMount() {
+      this.props.debug();
+  }
+
   render() {
     return (
-      <div>
-        <h1>pomhub</h1>
-        <button onClick={this.props.debug}>Debug</button>
-        <div>name:{this.props.name}</div>
-        <div>location:{this.props.location}</div>
+      <div id="top-container">
+        <div id="top-menu">
+          <div>
+            <img className="avatar" src={this.props.image_url} /> {this.props.name}
+          </div>
+        </div>
+        <div id="top-content">
+          コンテンツ
+        </div>
+
       </div>
     )
   }
@@ -17,6 +26,7 @@ export default class Top extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    image_url: state.github.avatar_url,
     name: state.github.name,
     location: state.github.location
   };

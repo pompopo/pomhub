@@ -12,7 +12,8 @@ export default function github(state={}, action) {
     case FETCH_USER_SUCCEED:
       return Object.assign({}, state, {
         name: action.user.name,
-        location: action.user.location
+        location: action.user.location,
+        avatar_url: action.user.avatar_url
       });
     default:
       return state;
