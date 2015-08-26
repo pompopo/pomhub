@@ -17,6 +17,7 @@ export default class Top extends React.Component {
           </div>
         </div>
         <div id="top-content">
+          <span className="mega-octicon octicon-inbox"></span>
           <ul>
           {this._notificationTitle(this.props.notifications)}
           </ul>
