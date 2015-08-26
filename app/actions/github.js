@@ -4,6 +4,24 @@ var BrowserWindow = remote.require('browser-window');
 
 export const AUTH_DID_SUCCEED = 'AUTH_DID_SUCCEED';
 export const FETCH_USER_SUCCEED = 'FETCH_USER_SUCCEED';
+export const FETCH_NOTIFICATIONS_SUCCEED = 'FETCH_NOTIFICATIONS_SUCCEED';
+
+function getToken(getState) {
+  return getState().github.auth_token;
+}
+
+export function fetchNotifications() {
+    return (dispatch, getState) => {
+      let token = getToken(getState);
+      let client = github.client(token).me();
+      client.notifications({participating: true}, (err, response) => {
+        dispatch({
+          type: FETCH_NOTIFICATIONS_SUCCEED,
+          data: response
+        });
+      });
+    }
+}
 
 function auth_did_succeed(token) {
     return {
@@ -11,6 +29,7 @@ function auth_did_succeed(token) {
       token: token
     }
 }
+
 export function fetchUser() {
     return (dispatch, getState) => {
       let token = getState().github.auth_token;
