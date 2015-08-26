@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchUser, fetchNotifications } from '../actions/github'
+import { fetchUser, fetchNotifications, fetchEvents } from '../actions/github'
 
 export default class Top extends React.Component {
   componentDidMount() {
@@ -50,7 +50,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchUser: () => dispatch(fetchUser()),
-    debug: () => dispatch(fetchNotifications())
+    debug: () => dispatch(fetchEvents())
   };
 }
 

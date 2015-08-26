@@ -10,6 +10,16 @@ function getToken(getState) {
   return getState().github.auth_token;
 }
 
+export function fetchEvents() {
+  return (dispatch, getState) => {
+    let token = getToken(getState);
+    let userName = getState().github.name;
+    let client = github.client(token).user(userName);
+    client.events((err, response) => {
+      console.log(require('util').inspect(response));
+    });
+  }
+}
 export function fetchNotifications() {
     return (dispatch, getState) => {
       let token = getToken(getState);
