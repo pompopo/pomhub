@@ -1,33 +1,32 @@
 import React from 'react'
 import { connect, createStore } from 'react-redux'
-import { increment, decrement, async_increment } from '../actions/counter'
+import { auth } from '../actions/github'
+import util from 'util'
 
 export default class Root extends React.Component {
   render() {
     return (
       <div>
-        <h1>Counter</h1>
-        <div>count = {this.props.count}</div>
-        <button onClick={this.props.increment}>Increment</button>
-        <button onClick={this.props.decrement}>Decrement</button>
-        <button onClick={this.props.async_increment}>Async Increment</button>
+        <h1>pomhub</h1>
+        <div>token = {this.props.token}</div>
+        <button onClick={this.props.auth}>Login</button>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
+  
+  console.log('>>>>>>> ' + util.inspect(state));
   return {
-    count: state
+    token: state.github.auth_token
   };
 }
 
 // Which action creators does it want to receive by props?
 function mapDispatchToProps(dispatch) {
   return {
-    increment: () => dispatch(increment()),
-    decrement: () => dispatch(decrement()),
-    async_increment: () => dispatch(async_increment()),
+    auth: () => dispatch(auth()),
   };
 }
 
