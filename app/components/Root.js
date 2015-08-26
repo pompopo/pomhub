@@ -1,38 +1,30 @@
 import React from 'react'
-import { connect, createStore } from 'react-redux'
-import { auth, fetchUser } from '../actions/github'
-import util from 'util'
+import { connect } from 'react-redux'
+import Top from './top'
+import Login from './login'
 
 export default class Root extends React.Component {
   render() {
-    return (
-      <div>
-        <h1>pomhub</h1>
-        <div>token = {this.props.token}</div>
-        <button onClick={this.props.auth}>Login</button>
-        <button onClick={this.props.debug}>Debug</button>
-        <div>name:{this.props.name}</div>
-        <div>location:{this.props.location}</div>
-      </div>
-    )
+    if (this.props.token) {
+      return (
+        <Top />
+      );
+    } else {
+      return (
+        <Login />
+      );
+    }
   }
 }
 
 function mapStateToProps(state) {
-
-  console.log('>>>>>>> ' + util.inspect(state));
   return {
     token: state.github.auth_token,
-    name: state.github.name,
-    location: state.github.location
   };
 }
 
-// Which action creators does it want to receive by props?
 function mapDispatchToProps(dispatch) {
   return {
-    auth: () => dispatch(auth()),
-    debug: () => dispatch(fetchUser())
   };
 }
 
