@@ -20,8 +20,6 @@ export function fetchUser() {
           type: FETCH_USER_SUCCEED,
           user: body
         });
-        var util = require('util');
-        console.log('body = ' + util.inspect(body));
       });
     }
 }
