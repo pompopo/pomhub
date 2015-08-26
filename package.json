@@ -1,0 +1,20 @@
+{
+  "name": "electron-boilerplate",
+  "version": "1.0.0",
+  "description": "app",
+  "main": "index.js",
+  "keywords": [],
+  "author": "pompopo",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^5.8.21",
+    "electron-prebuilt": "^0.31.0",
+    "react": "^0.13.3",
+    "react-redux": "^1.0.0",
+    "redux-thunk": "^0.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4"
+  }
+}
