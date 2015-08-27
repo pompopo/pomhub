@@ -18,10 +18,7 @@ export default class Top extends React.Component {
           </div>
         </div>
         <div id="top-content">
-          <span className="mega-octicon octicon-inbox"></span>
-          <ul>
-            {this._viewForEvents(this.props.events)}
-          </ul>
+          {this._viewForEvents(this.props.events)}
         </div>
 
       </div>
@@ -34,7 +31,7 @@ export default class Top extends React.Component {
         return true;
       }).map((e) => {
         return (
-          <li><Event event={e} /></li>
+          <Event event={e} />
         );
       });
     } else {

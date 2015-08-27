@@ -17,7 +17,11 @@ export default class Event extends React.Component {
       case 'PushEvent':
         return event.repo.name + 'にプッシュしました';
       case 'IssueCommentEvent':
-        return event.repo.name + 'Issue作成 - ' + event.payload.comment.body;
+        return event.repo.name + 'コメント - ' + event.payload.comment.body;
+      case 'PullRequestReviewCommentEvent':
+        return event.repo.name + 'PRコメント - ' + event.payload.comment.body;
+      case 'PullRequestEvent':
+        return event.repo.name + 'PullRequest ' + event.payload.pull_request.title;
       default:
         return event.type;
     }
