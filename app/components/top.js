@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchUser, fetchNotifications, fetchEvents } from '../actions/github'
 import { selectTab } from '../actions/tab'
-import Event from './event.js'
+import EventList from './events/event-list'
 
 export default class Top extends React.Component {
   componentDidMount() {
@@ -23,26 +23,11 @@ export default class Top extends React.Component {
           </div>
         </div>
         <div id="top-content">
-          {this._viewForEvents(this.props.events)}
+          <EventList events={this.props.events} />
         </div>
 
       </div>
     )
-  }
-
-  _viewForEvents(events) {
-    if (events) {
-      return events.filter((e) => {
-        return true;
-      }).map((e) => {
-        return (
-          <Event event={e} />
-        );
-      });
-    } else {
-      return 'イベントなし'
-    }
-
   }
 
   _notificationTitle(notifications) {
