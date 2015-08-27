@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchUser, fetchNotifications, fetchEvents } from '../actions/github'
+import { fetchUser } from '../actions/github'
 import { selectTab } from '../actions/tab'
 import EventList from './events/event-list'
+import NotificationList from './notifications/notification-list'
 
 export default class Top extends React.Component {
   componentDidMount() {
@@ -19,28 +20,30 @@ export default class Top extends React.Component {
               <span className="mega-octicon octicon-octoface"></span>
               Events
             </div>
-            <button onClick={this.props.debug}>Debug</button>
+            <div className="menu-item" onClick={this.props.selectNotificationsTab}>
+              <span className="mega-octicon octicon-inbox"></span>
+              Notifications
+            </div>
           </div>
         </div>
+
         <div id="top-content">
-          <EventList events={this.props.events} />
+          {this._currentTab()}
         </div>
 
       </div>
     )
   }
 
-  _notificationTitle(notifications) {
-    if (notifications) {
-      return notifications.filter((n) => {
-        return n.reason === 'comment';
-      }).map((n) => {
-        return (
-            <li>[{n.repository.full_name}]({n.subject.type}){n.subject.title} </li>
-        );
-      });
-    } else {
-      return 'データなし';
+  _currentTab() {
+    switch (this.props.tab) {
+      case 0:
+        return (<EventList events={this.props.events} />)
+      case 1:
+        return (<NotificationList notifications={this.props.notifications} />)
+      default:
+        return (<div></div>)
+
     }
   }
 }
@@ -50,7 +53,8 @@ function mapStateToProps(state) {
     image_url: state.github.avatar_url,
     name: state.github.name,
     notifications: state.github.notifications,
-    events: state.github.events
+    events: state.github.events,
+    tab: state.tab.index
   };
 }
 
@@ -58,7 +62,7 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchUser: () => dispatch(fetchUser()),
     selectEventsTab: () => dispatch(selectTab(0)),
-    debug: () => dispatch(fetchEvents())
+    selectNotificationsTab: () => dispatch(selectTab(1))
   };
 }
 

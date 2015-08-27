@@ -20,7 +20,7 @@ body {
   flex-basis: 200px; }
 
 #top-content {
-  background: gray;
+  background: white;
   flex-grow: 1; }
 
 .avatar {
@@ -32,3 +32,12 @@ body {
   font-size: 1.2em; }
   .menu-item:hover {
     color: gray; }
+
+.repository {
+  font-weight: bold;
+  font-size: 18px;
+  color: #4078c0;
+  margin: 2px; }
+
+.notification {
+  margin: 10px; }

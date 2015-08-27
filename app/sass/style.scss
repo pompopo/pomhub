@@ -24,7 +24,7 @@ body {
 }
 
 #top-content {
-  background: gray;
+  background: white;
   flex-grow: 1;
 }
 
@@ -39,4 +39,15 @@ body {
     color: gray;
   }
   font-size: 1.2em;
+}
+
+.repository {
+  font-weight: bold;
+  font-size: 18px;
+  color: #4078c0;
+  margin: 2px;
+}
+
+.notification {
+  margin: 10px;
 }
