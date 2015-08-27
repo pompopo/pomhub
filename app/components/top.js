@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchUser, fetchNotifications, fetchEvents } from '../actions/github'
+import Event from './event.js'
 
 export default class Top extends React.Component {
   componentDidMount() {
       this.props.fetchUser();
-      // this.props.fetchEvents();
   }
 
   render() {
@@ -34,7 +34,7 @@ export default class Top extends React.Component {
         return true;
       }).map((e) => {
         return (
-          <li><img className="avatar" src={e.actor.avatar_url}/>{e.actor.login} {e.type} </li>
+          <li><Event event={e} /></li>
         );
       });
     } else {
