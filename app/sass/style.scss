@@ -46,8 +46,12 @@ body {
   font-size: 18px;
   color: #4078c0;
   margin: 2px;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .notification {
   margin: 10px;
+
 }
