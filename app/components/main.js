@@ -11,7 +11,8 @@ var defaultState = {
     auth_token: undefined,    // GitHub トークン(String)
     name: '',                 // 認証中のユーザ名(String)
     avatar_url: '',           // 認証中のユーザのプロフィール画像URL(String)
-    events: undefined         // イベント一覧(Array Object)
+    events: undefined,         // イベント一覧(Array Object)
+    notifications: []
   },
 
   tab: {

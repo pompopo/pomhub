@@ -6,7 +6,7 @@ export default class Event extends React.Component {
   render() {
     let e = this.props.event;
     return (
-      <div>
+      <div className="event">
         {this._icon(e)}
         <span className="repository">{e.repo.name}</span>{this._makeMessage(e)}
       </div>
