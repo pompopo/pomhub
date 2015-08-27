@@ -5,6 +5,7 @@ import { fetchUser, fetchNotifications, fetchEvents } from '../actions/github'
 export default class Top extends React.Component {
   componentDidMount() {
       this.props.fetchUser();
+      // this.props.fetchEvents();
   }
 
   render() {
@@ -19,7 +20,7 @@ export default class Top extends React.Component {
         <div id="top-content">
           <span className="mega-octicon octicon-inbox"></span>
           <ul>
-          {this._notificationTitle(this.props.notifications)}
+            {this._viewForEvents(this.props.events)}
           </ul>
         </div>
 
@@ -27,9 +28,26 @@ export default class Top extends React.Component {
     )
   }
 
+  _viewForEvents(events) {
+    if (events) {
+      return events.filter((e) => {
+        return true;
+      }).map((e) => {
+        return (
+          <li><img className="avatar" src={e.actor.avatar_url}/>{e.actor.login} {e.type} </li>
+        );
+      });
+    } else {
+      return 'イベントなし'
+    }
+
+  }
+
   _notificationTitle(notifications) {
     if (notifications) {
-      return notifications.map((n) => {
+      return notifications.filter((n) => {
+        return n.reason === 'comment';
+      }).map((n) => {
         return (
             <li>[{n.repository.full_name}]({n.subject.type}){n.subject.title} </li>
         );
@@ -44,13 +62,15 @@ function mapStateToProps(state) {
   return {
     image_url: state.github.avatar_url,
     name: state.github.name,
-    notifications: state.github.notifications
+    notifications: state.github.notifications,
+    events: state.github.events
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchUser: () => dispatch(fetchUser()),
+    fetchEvents: () => dispatch(fetchEvents()),
     debug: () => dispatch(fetchEvents())
   };
 }

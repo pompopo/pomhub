@@ -1,4 +1,4 @@
-import { AUTH_DID_SUCCEED, FETCH_USER_SUCCEED, FETCH_NOTIFICATIONS_SUCCEED } from '../actions/github';
+import { AUTH_DID_SUCCEED, FETCH_USER_SUCCEED, FETCH_NOTIFICATIONS_SUCCEED, FETCH_EVENTS_SUCCEED} from '../actions/github';
 
 export default function github(state={}, action) {
   switch(action.type) {
@@ -18,6 +18,11 @@ export default function github(state={}, action) {
     case FETCH_NOTIFICATIONS_SUCCEED:
       return Object.assign({}, state, {
         notifications: action.data
+      });
+
+    case FETCH_EVENTS_SUCCEED:
+      return Object.assign({}, state, {
+        events: action.data
       });
     default:
       return state;
