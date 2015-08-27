@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchUser, fetchNotifications, fetchEvents } from '../actions/github'
+import { selectTab } from '../actions/tab'
 import Event from './event.js'
 
 export default class Top extends React.Component {
@@ -14,6 +15,10 @@ export default class Top extends React.Component {
         <div id="top-menu">
           <div>
             <img className="avatar" src={this.props.image_url} /> {this.props.name}
+            <div className="menu-item" onClick={this.props.selectEventsTab}>
+              <span className="mega-octicon octicon-octoface"></span>
+              Events
+            </div>
             <button onClick={this.props.debug}>Debug</button>
           </div>
         </div>
@@ -67,7 +72,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchUser: () => dispatch(fetchUser()),
-    fetchEvents: () => dispatch(fetchEvents()),
+    selectEventsTab: () => dispatch(selectTab(0)),
     debug: () => dispatch(fetchEvents())
   };
 }

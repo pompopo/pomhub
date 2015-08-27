@@ -6,13 +6,23 @@ import rootReducer from '../reducers/index.js'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-let storedState = {
+var defaultState = {
   github: {
-    auth_token: localStorage.auth_token
+    auth_token: undefined,    // GitHub トークン(String)
+    name: '',                 // 認証中のユーザ名(String)
+    avatar_url: '',           // 認証中のユーザのプロフィール画像URL(String)
+    events: undefined         // イベント一覧(Array Object)
+  },
+
+  tab: {
+    index: 0      // 選択中のタブ
   }
-};
+}
+defaultState.github.auth_token = localStorage.auth_token;
+defaultState.github.name = localStorage.name;
+
 let logger = createLogger();
-let store = applyMiddleware(thunk, logger)(createStore)(rootReducer, storedState);
+let store = applyMiddleware(thunk, logger)(createStore)(rootReducer, defaultState);
 React.render(
   <Provider store={store}>
     {() => <Root />}

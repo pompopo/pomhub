@@ -32,3 +32,11 @@ body {
   height: 50px;
   width: 50px;
 }
+
+.menu-item {
+  color: white;
+  &:hover {
+    color: gray;
+  }
+  font-size: 1.2em;
+}

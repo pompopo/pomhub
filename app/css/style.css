@@ -26,3 +26,9 @@ body {
 .avatar {
   height: 50px;
   width: 50px; }
+
+.menu-item {
+  color: white;
+  font-size: 1.2em; }
+  .menu-item:hover {
+    color: gray; }

@@ -10,6 +10,8 @@ export default function github(state={}, action) {
       });
 
     case FETCH_USER_SUCCEED:
+      localStorage.name = action.user.name;
+
       return Object.assign({}, state, {
         name: action.user.name,
         avatar_url: action.user.avatar_url
