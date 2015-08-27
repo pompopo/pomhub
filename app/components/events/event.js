@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import shell from 'shell'
 
 export default class Event extends React.Component {
   render() {
@@ -7,21 +8,33 @@ export default class Event extends React.Component {
     return (
       <div>
         <img className="avatar" src={e.actor.avatar_url}/>
-        {e.actor.login} {this._makeMessage(e)}
+        <span className="repository">{e.repo.name}</span>{this._makeMessage(e)}
       </div>
     );
+  }
+
+  _openCommit(commit, event) {
+    return () => {
+      let url = 'https://github.com/' + event.repo.name + '/commit/' + commit.sha;
+      shell.openExternal(url);
+    }
   }
 
   _makeMessage(event) {
     switch(event.type) {
       case 'PushEvent':
-        return event.repo.name + 'にプッシュしました';
+        var message = 'にプッシュしました';
+        var commits = event.payload.commits.map((commit) => {
+          return (<div onClick={this._openCommit(commit, event)}>{commit.message}</div>);
+        });
+
+        return (<span>{message}{commits}</span>)
       case 'IssueCommentEvent':
-        return event.repo.name + 'コメント - ' + event.payload.comment.body;
+        return 'コメント - ' + event.payload.comment.body;
       case 'PullRequestReviewCommentEvent':
-        return event.repo.name + 'PRコメント - ' + event.payload.comment.body;
+        return 'PRコメント - ' + event.payload.comment.body;
       case 'PullRequestEvent':
-        return event.repo.name + 'PullRequest ' + event.payload.pull_request.title;
+        return 'PullRequest ' + event.payload.pull_request.title;
       default:
         return event.type;
     }
